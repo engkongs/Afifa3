@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Pesan Spesial - Bryan Adams Heaven</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Quicksand:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Classes Font Dynamic */
+        .font-dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .font-greatvibes {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .font-caveat {
+            font-family: 'Caveat', cursive;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-quicksand {
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(244, 114, 182, 0.4);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(244, 114, 182, 0.7);
+        }
+
+        /* Light Glassmorphism Styles */
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 15px 35px rgba(244, 114, 182, 0.12), 0 5px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.98);
+            box-shadow: 0 20px 45px rgba(236, 72, 153, 0.15), 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-modal-light {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.98);
+            box-shadow: 0 25px 50px rgba(244, 114, 182, 0.25);
+        }
+
+        /* Envelope 3D Construction */
+        .envelope-wrapper {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .envelope {
+            position: relative;
+            width: 280px;
+            height: 180px;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(244, 114, 182, 0.25), 0 8px 16px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        @media (min-width: 640px) {
+            .envelope {
+                width: 360px;
+                height: 230px;
+            }
+        }
+
+        .envelope:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 25px 45px rgba(244, 114, 182, 0.35);
+        }
+
+        /* Flap 3D rotation */
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 100px solid #f472b6;
+            transform-origin: top;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s ease;
+            z-index: 5;
+            filter: drop-shadow(0 4px 6px rgba(244, 114, 182, 0.25));
+        }
+
+        @media (min-width: 640px) {
+            .flap {
+                border-left-width: 180px;
+                border-right-width: 180px;
+                border-top-width: 130px;
+            }
+        }
+
+        .envelope.open .flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        /* Inner Pocket Sides */
+        .pocket-left {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 140px solid #f9a8d4;
+            border-top: 90px solid transparent;
+            border-bottom: 90px solid #f9a8d4;
+            border-radius: 0 0 0 12px;
+            z-index: 3;
+        }
+
+        .pocket-right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-right: 140px solid #f9a8d4;
+            border-top: 90px solid transparent;
+            border-bottom: 90px solid #f9a8d4;
+            border-radius: 0 0 12px 0;
+            z-index: 3;
+        }
+
+        .pocket-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-bottom: 100px solid #f472b6;
+            border-radius: 0 0 12px 12px;
+            z-index: 4;
+        }
+
+        @media (min-width: 640px) {
+            .pocket-left {
+                border-left-width: 180px;
+                border-top-width: 115px;
+                border-bottom-width: 115px;
+            }
+
+            .pocket-right {
+                border-right-width: 180px;
+                border-top-width: 115px;
+                border-bottom-width: 115px;
+            }
+
+            .pocket-bottom {
+                border-left-width: 180px;
+                border-right-width: 180px;
+                border-bottom-width: 130px;
+            }
+        }
+
+        /* Letter Inside Preview */
+        .letter-preview {
+            position: absolute;
+            bottom: 10px;
+            left: 5%;
+            width: 90%;
+            height: 85%;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border: 1px solid #fce7f3;
+        }
+
+        .envelope.open .letter-preview {
+            transform: translateY(-80px) scale(1.05);
+            z-index: 6;
+        }
+
+        /* Animations */
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(1.5deg);
+            }
+        }
+
+        .animate-float {
+            animation: floating 4.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow-light {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(244, 114, 182, 0.3);
+            }
+
+            50% {
+                shadow: 0 0 35px rgba(244, 114, 182, 0.6), 0 0 50px rgba(251, 207, 232, 0.8);
+            }
+        }
+
+        .pulse-glow-light {
+            animation: pulse-glow-light 2.5s infinite;
+        }
+
+        /* Floating Particle Effects */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 20;
+            animation: floatUp linear forwards;
+            filter: drop-shadow(0 2px 4px rgba(244, 114, 182, 0.2));
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.3) rotate(0deg);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.85;
+            }
+
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="bg-rose-50 text-slate-800 font-quicksand min-h-screen overflow-x-hidden relative selection:bg-pink-200 selection:text-pink-900">
+
+    <!-- Preset Fixed Background Image (Aesthetic Pastel Flower/Sky Photo) -->
+    <div id="bgContainer" class="fixed inset-0 bg-cover bg-center transition-all duration-1000 z-0 scale-105"
+        style="background-image: url('WhatsApp Image 2026-10-15 at 10.05.16.jpeg');">
+        <!-- Soft Overlay Layer -->
+        <div
+            class="absolute inset-0 bg-gradient-to-br from-pink-100/80 via-rose-50/75 to-amber-50/80 backdrop-blur-[2px]">
+        </div>
+    </div>
+
+    <!-- Floating Particle Container -->
+    <div id="particleContainer" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative z-20 min-h-screen flex flex-col items-center justify-center p-4">
+
+        <!-- Top Right Floating Audio Player -->
+        <header class="fixed top-4 right-4 z-40">
+            <div id="musicWidget"
+                class="glass-panel-light text-slate-700 p-2 sm:px-4 sm:py-2 rounded-full flex items-center space-x-2 border border-pink-200 shadow-lg">
+                <button id="btnPlayMusic" onclick="toggleAudio()"
+                    class="w-9 h-9 rounded-full bg-pink-500 hover:bg-pink-600 text-white flex items-center justify-center transition-transform hover:scale-110 shadow-md active:scale-90">
+                    <i id="musicIcon" class="fa-solid fa-music"></i>
+                </button>
+                <div class="hidden sm:flex flex-col text-left pr-1">
+                    <span class="text-[11px] font-bold text-pink-700 leading-tight">Bryan Adams - Heaven</span>
+                    <span id="musicStatusText" class="text-[9px] text-slate-500">Putar Musik Latar</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 1. ENVELOPE / INTRO VIEW -->
+        <section id="envelopeSection"
+            class="flex flex-col items-center justify-center text-center my-auto transition-all duration-700">
+
+            <!-- Recipient Badge (if To parameter exists) -->
+            <div id="recipientBadge"
+                class="hidden mb-6 px-5 py-2 glass-panel-light rounded-full border border-pink-200 shadow-md animate-bounce">
+                <span class="text-xs font-bold text-pink-600 uppercase tracking-wider block">Untuk:</span>
+                <span id="recipientNameDisplay" class="text-base font-semibold text-slate-800">Nama Penerima</span>
+            </div>
+
+            <div class="mb-8 animate-float">
+                <div class="envelope-wrapper">
+                    <div id="mainEnvelope" onclick="openEnvelope()" class="envelope pulse-glow-light mx-auto">
+                        <div class="flap"></div>
+                        <div class="pocket-left"></div>
+                        <div class="pocket-right"></div>
+                        <div class="pocket-bottom"></div>
+
+                        <!-- Letter peek -->
+                        <div class="letter-preview flex flex-col justify-between items-center text-slate-700">
+                            <div class="w-12 h-1 bg-pink-300 rounded-full mb-2"></div>
+                            <i class="fa-solid fa-heart text-pink-500 text-2xl animate-pulse"></i>
+                            <p class="text-[10px] text-pink-400 font-montserrat font-medium">Klik untuk Membuka</p>
+                        </div>
+
+                        <!-- Envelope Seal Icon -->
+                        <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                            <div
+                                class="w-12 h-12 rounded-full bg-gradient-to-tr from-pink-500 to-rose-400 text-white flex items-center justify-center shadow-lg border-2 border-white transform hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-envelope-open-text text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-3 max-w-md mx-auto">
+                <h1 class="text-2xl sm:text-3xl font-bold text-slate-800 drop-shadow-sm tracking-wide">
+                    Tembung Khusus Bojoku 💌
+                </h1>
+                <p class="text-pink-800/80 text-sm sm:text-base font-medium px-4">
+                    Iku Klik Amplop E Ing Kanggo Maos Pesen Anget Sing Endi Ditampilake Kanggo Panjenengan, Ora Ngapak Ora Kepenak Yoo.
+                </p>
+                <button onclick="openEnvelope()"
+                    class="mt-4 px-8 py-3 bg-gradient-to-r from-pink-500 via-rose-400 to-amber-400 hover:from-pink-600 hover:to-amber-500 text-white font-semibold rounded-full shadow-lg hover:shadow-pink-300/50 transform hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center space-x-2 mx-auto">
+                    <i class="fa-solid fa-heart-open"></i>
+                    <span>Buka Ntuuu Cepetan Suratnyee </span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. OPENED LETTER DISPLAY VIEW -->
+        <section id="letterSection"
+            class="hidden w-full max-w-2xl my-auto opacity-0 transform translate-y-8 transition-all duration-1000 py-8">
+            <div
+                class="glass-card-light rounded-3xl p-6 sm:p-10 relative overflow-hidden text-center sm:text-left transition-all">
+                <!-- Decorative Soft Background Blobs -->
+                <div
+                    class="absolute top-0 right-0 -mr-10 -mt-10 w-36 h-36 bg-pink-200/50 rounded-full blur-2xl pointer-events-none">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 -ml-10 -mb-10 w-36 h-36 bg-amber-200/50 rounded-full blur-2xl pointer-events-none">
+                </div>
+
+                <!-- Stamp Header -->
+                <div class="flex justify-between items-start border-b border-pink-100 pb-4 mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-pink-100 text-pink-500 flex items-center justify-center font-bold text-lg shadow-inner">
+                            💌
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-pink-500 font-bold block">Surat
+                                Spesial</span>
+                            <span id="displaySender" class="text-sm text-slate-600 italic font-medium">Dari Seseorang
+                                yang Peduli</span>
+                        </div>
+                    </div>
+                    <div class="text-right text-xs text-slate-400 font-montserrat">
+                        <span id="displayDate">--/--/----</span>
+                    </div>
+                </div>
+
+                <!-- Letter Content Area -->
+                <div class="min-h-[180px] flex flex-col justify-center my-6 py-2">
+                    <p id="displayText"
+                        class="font-dancing text-2xl sm:text-3xl lg:text-4xl leading-relaxed text-slate-800 font-semibold whitespace-pre-wrap">
+                        "Baby, you're all that I want. When you're lyin' here in my arms, I'm findin' it hard to
+                        believe... We're in heaven."
+                    </p>
+                </div>
+
+                <!-- Letter Footer & Actions -->
+                <div
+                    class="border-t border-pink-100 pt-5 mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <button onclick="closeLetter()"
+                        class="px-5 py-2.5 bg-pink-100 hover:bg-pink-200 text-pink-800 rounded-full text-xs font-semibold transition-colors flex items-center space-x-2">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>Tutup Surat</span>
+                    </button>
+
+                    <!-- SHARE / CREATE LINK BUTTON -->
+                    
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CREATE & SHARE LINK MODAL -->
+    <div id="shareModal"
+        class="fixed inset-0 z-50 bg-slate-900/30 backdrop-blur-md flex justify-center items-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass-modal-light text-slate-800 rounded-3xl w-full max-w-lg p-6 sm:p-8 relative shadow-2xl border border-white transform scale-95 transition-all"
+            id="shareModalCard">
+
+            <!-- Close Button -->
+            <button onclick="closeShareModal()"
+                class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 bg-pink-100/60 hover:bg-pink-200/80 rounded-full w-8 h-8 flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <p class="text-xs text-slate-500 mb-6">Isi formulir berikut untuk memenampilkan surat unik saat dikirimkan
+                ke orang terkasih.</p>
+
+            <form onsubmit="generateShareLink(event)" class="space-y-4">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-pink-700 mb-1">Kepada (Penerima)</label>
+                        <input type="text" id="shareTo" placeholder="Contoh: Sarah / Budi"
+                            class="w-full bg-white/90 border border-pink-200 rounded-xl px-3 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-200 transition-all shadow-sm"
+                            required>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-pink-700 mb-1">Dari (Pengirim)</label>
+                        <input type="text" id="shareFrom" placeholder="Contoh: Seseorang yang Peduli"
+                            class="w-full bg-white/90 border border-pink-200 rounded-xl px-3 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-200 transition-all shadow-sm"
+                            required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-pink-700 mb-1">Gaya Font Tulisan</label>
+                    <select id="shareFont"
+                        class="w-full bg-white/90 border border-pink-200 rounded-xl px-3 py-2.5 text-sm text-slate-800 focus:outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-200 transition-all shadow-sm">
+                        <option value="font-dancing" class="font-dancing">Dancing Script (Kaligrafi Romantis)</option>
+                        <option value="font-greatvibes" class="font-greatvibes">Great Vibes (Kaligrafi Klasik)</option>
+                        <option value="font-caveat" class="font-caveat">Caveat (Tulisan Tangan Casually)</option>
+                        <option value="font-playfair" class="font-playfair">Playfair Display (Elegan Formal)</option>
+                        <option value="font-quicksand" class="font-quicksand">Quicksand (Minimalis Modern)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-pink-700 mb-1">Isi Pesan Surat</label>
+                    <textarea id="shareMsg" rows="4"
+                        placeholder="Tuliskan ucapan romantis, lirik lagu, atau pesan manis Anda di sini..."
+                        class="w-full bg-white/90 border border-pink-200 rounded-xl p-3 text-sm text-slate-800 focus:outline-none focus:border-pink-400 focus:ring-2 focus:ring-pink-200 transition-all shadow-sm resize-none"
+                        required></textarea>
+                </div>
+
+                <!-- Resulting Share Link Input -->
+                <div id="shareResultContainer" class="hidden pt-2 space-y-2">
+                    <label class="block text-xs font-bold text-emerald-600">Link Unik Berhasil Dibuat!</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="generatedUrlInput" readonly
+                            class="w-full bg-pink-50/80 border border-pink-200 rounded-xl px-3 py-2 text-xs text-slate-700 focus:outline-none font-mono select-all">
+                        <button type="button" onclick="copyGeneratedLink()"
+                            class="px-4 py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-xl text-xs font-bold transition-all shadow-md shrink-0 flex items-center space-x-1">
+                            <i class="fa-solid fa-copy"></i>
+                            <span id="copyBtnText">Salin</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-2">
+                    <button type="submit" id="btnGenerateLink"
+                        class="w-full py-3 bg-gradient-to-r from-pink-500 via-rose-400 to-amber-400 hover:from-pink-600 hover:to-amber-500 text-white font-semibold rounded-xl shadow-lg transition-all transform active:scale-98 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-link"></i>
+                        <span>Buat Link Surat</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- PRESET BRYAN ADAMS - HEAVEN BACKGROUND AUDIO MP3 -->
+    <audio id="bgAudio" loop src="Bryan Adams - Heaven.mp3"></audio>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Preset Fixed Audio & BG Image Configurations
+        const FIXED_CONFIG = {
+            musicUrl: "Bryan Adams - Heaven.mp3", // Nama file mp3 di folder lokal Anda
+            bgUrl: "..."
+        };
+
+        // Default Message State
+        let currentMessage = {
+            to: "Afifa", 
+            from: "Dari Baihaki",
+            msg: "Hallo Sayang gimana selama 5 Hari ini?, aku harap si kamu ngagenin akoo juga yaa hehehe, Makasih yaa Sayang udah mau sabar dan ngajarin aku dari Kamis sampai Senin ini, makasih juga udah mau ngeyakinin aku kalo aku bisa sampai Senin. Akhirnya aku bisa jugaa yaa sayangg sampai hari ini, btw pasti udah penasaran yaa ama gebrakan aku yang aku maksud hahaha, tadaaaaa ini gerbakan yang aku maksud ini adalah kata-kata special dari aku atau ucapan terimakasih dari aku buat kamu yang udah sabar banget sama aku selama ini sayang. Tadinya aku bilang pas di hari Kamis itu kaya buat ngasih tau kamu aku ngapain aja kan sealma 5 Hari itu, tapi aku rasa lebih baik ini ucapan terima kasih aku ke kamu sayang, oh iyaa akoo seneng banget bisa berhasil sampai Senin sayang, semoga di hari-hari selanjutnya aku bakalan terbiasa kaya gini yaa sayang, yang bisa sabar dalam hal apapun terutama dalam hal ini. Hmmm kayanya ini sekalian ucapan Anniversary kita deh dari aku hahaha, Happy Anniversary sayang yang ke 3 Months doa aku sama pastinya yang kaya di chat, semoga hubungan kita menjadi lebih baik kedepannya, makin sehat terus hubungan kitaa, makin saling mengerti satu sama lain, tentunya makin saling sabar satu sama lain, selalu dateng hal-hal baik kepada hubungan kita, dan jauhkan hal-hal yang buruk dari hubungan kita, dan satu lagi jauhkanlah dari hal-hal yang ingin dan membuat hubungan kita hancur, dan apa yang lagi kita usahakan di berikan kelancaran serta kemudahan setiap proses dan langkahnya yaa sayang, dan aku mau sama kamu terus selamanyaa sampai maut memisahkan, aamiin. Itu ucapan Anniversary aku buat hubungan kita acooyyyy dehh hahhahha, dan yang palin terakhir aku selalu bilang masih tetep sama yaitu ALWAYS LOVE U AFIFA RACHMAWATI🤍.",
+            font: "font-dancing"
+        };
+
+        let isOpen = false;
+        let isPlaying = false;
+
+        // DOM Elements
+        const envelopeSection = document.getElementById('envelopeSection');
+        const letterSection = document.getElementById('letterSection');
+        const mainEnvelope = document.getElementById('mainEnvelope');
+        const shareModal = document.getElementById('shareModal');
+        const shareModalCard = document.getElementById('shareModalCard');
+        const particleContainer = document.getElementById('particleContainer');
+
+        const displayText = document.getElementById('displayText');
+        const displaySender = document.getElementById('displaySender');
+        const displayDate = document.getElementById('displayDate');
+
+        const recipientBadge = document.getElementById('recipientBadge');
+        const recipientNameDisplay = document.getElementById('recipientNameDisplay');
+
+        const bgAudio = document.getElementById('bgAudio');
+        const btnPlayMusic = document.getElementById('btnPlayMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicStatusText = document.getElementById('musicStatusText');
+
+        // Initialize App & Read URL Parameters
+        window.addEventListener('DOMContentLoaded', () => {
+            // Set current date formatted
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            displayDate.textContent = today.toLocaleDateString('id-ID', options);
+
+            // Read URL Parameters (Base64 payload)
+            parseUrlParameters();
+
+            // Render message content
+            renderMessageContent();
+
+            // Start ambient particles
+            createParticles();
+        });
+
+        // Read and parse custom parameters from URL
+        function parseUrlParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Check for Base64 encoded payload param 'data'
+            const encodedData = urlParams.get('data');
+            if (encodedData) {
+                try {
+                    const decoded = JSON.parse(decodeURIComponent(atob(encodedData)));
+                    if (decoded.msg) currentMessage.msg = decoded.msg;
+                    if (decoded.from) currentMessage.from = decoded.from;
+                    if (decoded.to) currentMessage.to = decoded.to;
+                    if (decoded.font) currentMessage.font = decoded.font;
+                    return;
+                } catch (e) {
+                    console.error("Gagal membaca parameter URL:", e);
+                }
+            }
+
+            // Fallback params (?to=...&from=...&msg=...)
+            if (urlParams.get('msg')) currentMessage.msg = urlParams.get('msg');
+            if (urlParams.get('from')) currentMessage.from = urlParams.get('from');
+            if (urlParams.get('to')) currentMessage.to = urlParams.get('to');
+            if (urlParams.get('font')) currentMessage.font = urlParams.get('font');
+        }
+
+        // Apply Message content & selected font to UI
+        function renderMessageContent() {
+            displayText.textContent = `"${currentMessage.msg}"`;
+            displaySender.textContent = currentMessage.from;
+
+            // Apply selected font style class
+            displayText.className = `${currentMessage.font || 'font-dancing'} text-2xl sm:text-3xl lg:text-4xl leading-relaxed text-slate-800 font-semibold whitespace-pre-wrap`;
+
+            if (currentMessage.to && currentMessage.to.trim() !== '') {
+                recipientNameDisplay.textContent = currentMessage.to;
+                recipientBadge.classList.remove('hidden');
+            } else {
+                recipientBadge.classList.add('hidden');
+            }
+        }
+
+        // Open Envelope Action
+        function openEnvelope() {
+            if (isOpen) return;
+            isOpen = true;
+
+            // Trigger envelope CSS animation
+            mainEnvelope.classList.add('open');
+
+            // Play preset Bryan Adams Heaven music automatically
+            playAudio();
+
+            // Delay showing full letter for smooth 3D animation
+            setTimeout(() => {
+                envelopeSection.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+
+                setTimeout(() => {
+                    envelopeSection.classList.add('hidden');
+                    letterSection.classList.remove('hidden');
+
+                    // Trigger fade in letter section
+                    setTimeout(() => {
+                        letterSection.classList.remove('opacity-0', 'translate-y-8');
+                    }, 50);
+                }, 400);
+            }, 800);
+        }
+
+        // Close Letter Action
+        function closeLetter() {
+            if (!isOpen) return;
+            isOpen = false;
+
+            letterSection.classList.add('opacity-0', 'translate-y-8');
+
+            setTimeout(() => {
+                letterSection.classList.add('hidden');
+                envelopeSection.classList.remove('hidden');
+
+                setTimeout(() => {
+                    envelopeSection.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+                    mainEnvelope.classList.remove('open');
+                }, 50);
+            }, 500);
+        }
+
+        // Audio Controls
+        function toggleAudio() {
+            if (isPlaying) {
+                pauseAudio();
+            } else {
+                playAudio();
+            }
+        }
+
+        function playAudio() {
+            bgAudio.play().then(() => {
+                isPlaying = true;
+                musicIcon.className = "fa-solid fa-pause";
+                btnPlayMusic.classList.add('animate-pulse');
+                if (musicStatusText) musicStatusText.textContent = "Diputar 🎵";
+            }).catch(err => {
+                console.log("Audio play diproteksi browser:", err);
+            });
+        }
+
+        function pauseAudio() {
+            bgAudio.pause();
+            isPlaying = false;
+            musicIcon.className = "fa-solid fa-music";
+            btnPlayMusic.classList.remove('animate-pulse');
+            if (musicStatusText) musicStatusText.textContent = "Jeda ⏸️";
+        }
+
+        // Share Modal Logic
+        function openShareModal() {
+            document.getElementById('shareTo').value = currentMessage.to || '';
+            document.getElementById('shareMsg').value = currentMessage.msg || '';
+            document.getElementById('shareFrom').value = currentMessage.from || '';
+            document.getElementById('shareFont').value = currentMessage.font || 'font-dancing';
+
+            document.getElementById('shareResultContainer').classList.add('hidden');
+            document.getElementById('btnGenerateLink').classList.remove('hidden');
+
+            shareModal.classList.remove('pointer-events-none', 'opacity-0');
+            shareModalCard.classList.remove('scale-95');
+            shareModalCard.classList.add('scale-100');
+        }
+
+        function closeShareModal() {
+            shareModal.classList.add('pointer-events-none', 'opacity-0');
+            shareModalCard.classList.remove('scale-100');
+            shareModalCard.classList.add('scale-95');
+        }
+
+        // Generate Custom Share Link (Base64 Encoded)
+        function generateShareLink(e) {
+            e.preventDefault();
+
+            const to = document.getElementById('shareTo').value.trim();
+            const msg = document.getElementById('shareMsg').value.trim();
+            const from = document.getElementById('shareFrom').value.trim();
+            const font = document.getElementById('shareFont').value;
+
+            const payload = { to, msg, from, font };
+            const base64Data = btoa(encodeURIComponent(JSON.stringify(payload)));
+
+            const baseUrl = window.location.origin + window.location.pathname;
+            const fullShareUrl = `${baseUrl}?data=${encodeURIComponent(base64Data)}`;
+
+            const urlInput = document.getElementById('generatedUrlInput');
+            urlInput.value = fullShareUrl;
+
+            document.getElementById('shareResultContainer').classList.remove('hidden');
+            document.getElementById('btnGenerateLink').classList.add('hidden');
+            document.getElementById('copyBtnText').textContent = "Salin";
+        }
+
+        // Copy Share Link to Clipboard
+        function copyGeneratedLink() {
+            const urlInput = document.getElementById('generatedUrlInput');
+            urlInput.select();
+            urlInput.setSelectionRange(0, 99999); // Support untuk perangkat seluler
+
+            try {
+                document.execCommand('copy');
+                document.getElementById('copyBtnText').textContent = "Tersalin! ✅";
+                setTimeout(() => {
+                    document.getElementById('copyBtnText').textContent = "Salin";
+                }, 2500);
+            } catch (err) {
+                alert('Gagal menyalin link secara otomatis.');
+            }
+        }
+
+        // Floating Heart Particles Effect
+        function createParticles() {
+            particleContainer.innerHTML = '';
+            const icons = ['❤️', '💖', '💕', '🌹', '✨'];
+            const particleCount = 22;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+                particle.textContent = randomIcon;
+
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.fontSize = `${Math.random() * 16 + 12}px`;
+
+                const duration = Math.random() * 8 + 6;
+                const delay = Math.random() * 5;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+
+                particleContainer.appendChild(particle);
+            }
+        }
+    </script>
+</body>
+
+</html>
